@@ -1,0 +1,19 @@
+h1 {
+    color: #FCA205;
+}
+
+body { 
+   background-color: #ECF0F5; 
+   font-family: arial,"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+   font-size: 12px;
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 500px;
+    margin-bottom: 0px;
+}
+
+div.ui-datepicker, .ui-datepicker input{font-size:62.5%;}
