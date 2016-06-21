@@ -5,18 +5,6 @@ from django.db import models
 
 
 
-class Klienci(models.Model):
-    imie = models.CharField('Imie', max_length=20)
-    mazwisko = models.CharField('Nazwisko', max_length=40)
-    email = models.EmailField('Email', max_length=254)
-
-    class Meta:
-        verbose_name = "Klient"
-        verbose_name_plural = "Klienci"
-
-    def __unicode__(self):
-        return self.imie + " " + self.mazwisko
-
 class Stoliki(models.Model):
     nr_stolika = models.IntegerField('Nr Stolika')
     ile_osob = models.IntegerField('Ile Osob')
@@ -39,6 +27,9 @@ class Rezerwacje(models.Model):
     class Meta:
         verbose_name = "Rezerwacja"
         verbose_name_plural = "Rezerwacje"
+
+    def __unicode__(self):
+        return self.imie + " " + self.nazwisko        
 
 
 

@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load filters %}
+
 <html>
     <head>
         <title>Django - System rezerwacji stolika</title>
@@ -65,7 +66,7 @@
 
           <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Rezerwacja stolika</h3>
+              <h3 class="box-title">Rezerwacja stolika </h3>
             </div>
             <div class="box-body">
             
@@ -92,14 +93,20 @@
              <div class="form-group">
                 <label>Imie:</label>
                 <div class="input-group">
-                  {{ form.imie|addcss:'form-control'  }}
+                  <div class="input-group-addon">
+                    <i class="fa fa-circle-thin"></i>
+                  </div>                
+                  {{ form.imie|add_css_attr:'form-control,true'  }}
                 </div>
               </div> 
 
               <div class="form-group">
                 <label>Nazwisko:</label>
                 <div class="input-group">
-                  {{ form.nazwisko|addcss:'form-control'  }}
+                  <div class="input-group-addon">
+                    <i class="fa fa-circle-thin"></i>
+                  </div>                
+                  {{ form.nazwisko|add_css_attr:'form-control,true'}}
                 </div>
               </div> 
 
@@ -109,24 +116,27 @@
                   <div class="input-group-addon">
                     <i class="fa fa-envelope"></i>
                   </div>
-                  {{ form.email|addcss:'form-control'  }}
+                  {{ form.email|add_css_attr:'form-control,true' }}
                 </div>
               </div> 
 
               <div class="form-group">
                 <label>Nr stolika:</label>
-                <div class="input-group" data-toggle="modal" data-target="#myModal">
+                <div class="input-group" >
                    <div class="input-group-addon">
                     <i class="fa fa-coffee" data-toggle="modal" data-target="#myModal"></i>
                   </div>
-                  {{ form.stolik|addcss:'form-control'  }}
+                  {{ form.stolik|add_css_attr:'form-control,true'  }}
                 </div>
               </div> 
               
               <div class="form-group">
                 <label>ilość osób:</label>
                 <div class="input-group">
-                  {{ form.ileosob|addcss:'form-control'  }}
+                  <div class="input-group-addon">
+                    <i class="fa fa-circle-thin"></i>
+                  </div>                
+                  {{ form.ileosob|add_css_attr:'form-control,true'  }}
                 </div>
               </div>     
                         
@@ -147,7 +157,30 @@
         <h4 class="modal-title" id="myModalLabel">Wybór stolika</h4>
       </div>
       <div class="modal-body">
-       <img src="{% static 'img/plan.png' %}" alt="Smiley face"> 
+      
+<table width="500" border="0" cellpadding="0" cellspacing="0" summary="Split Image">
+<tr>
+ <td><a href="#1x1" id="1" ><img src="{% static 'img/plan/plan23_part1x1.jpg' %}" width="166" height="133" alt="Part 1x1" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part1x1.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part1x1.jpg' %}';return true;" /></a></td>
+ <td><img src="{% static 'img/plan/plan23_swap_part1x2.jpg' %}" width="166" height="133" alt="Part 1x2" border="0" /></td>
+ <td><a href="#1x3" id="2" ><img src="{% static 'img/plan/plan23_part1x3.jpg' %}" width="168" height="133" alt="Part 1x3" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part1x3.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part1x3.jpg' %}';return true;" /></a></td>
+</tr>
+<tr>
+ <td><a href="#2x1" id="3" ><img src="{% static 'img/plan/plan23_part2x1.jpg' %}" width="166" height="133" alt="Part 2x1" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part2x1.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part2x1.jpg' %}';return true;" /></a></td>
+ <td><a href="#2x2" id="4" ><img src="{% static 'img/plan/plan23_part2x2.jpg' %}" width="166" height="133" alt="Part 2x2" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part2x2.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part2x2.jpg' %}';return true;" /></a></td>
+ <td><a href="#2x3" id="5" ><img src="{% static 'img/plan/plan23_part2x3.jpg' %}" width="168" height="133" alt="Part 2x3" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part2x3.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part2x3.jpg' %}';return true;" /></a></td>
+</tr>
+<tr>
+ <td><a href="#3x1" id="6" ><img src="{% static 'img/plan/plan23_part3x1.jpg' %}" width="166" height="133" alt="Part 3x1" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part3x1.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part3x1.jpg' %}';return true;" /></a></td>
+ <td><a href="#3x2" id="7" ><img src="{% static 'img/plan/plan23_part3x2.jpg' %}" width="166" height="133" alt="Part 3x2" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part3x2.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part3x2.jpg' %}';return true;" /></a></td>
+ <td><a href="#3x3" id="8" ><img src="{% static 'img/plan/plan23_part3x3.jpg' %}" width="168" height="133" alt="Part 3x3" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part3x3.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part3x3.jpg' %}';return true;" /></a></td>
+</tr>
+<tr>
+ <td><a href="#4x1" id="9" ><img src="{% static 'img/plan/plan23_part4x1.jpg' %}" width="166" height="135" alt="Part 4x1" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part4x1.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part4x1.jpg' %}';return true;" /></a></td>
+ <td><a href="#4x2" id="10" ><img src="{% static 'img/plan/plan23_part4x2.jpg' %}" width="166" height="135" alt="Part 4x2" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part4x2.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part4x2.jpg' %}';return true;" /></a></td>
+ <td><a href="#4x3" id="11" ><img src="{% static 'img/plan/plan23_part4x3.jpg' %}" width="168" height="135" alt="Part 4x3" border="0" onmouseover="this.src='{% static 'img/plan/plan23_swap_part4x3.jpg' %}';return true;" onmouseout="this.src='{% static 'img/plan/plan23_part4x3.jpg' %}';return true;" /></a></td>
+</tr>
+</table>    
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -175,6 +208,8 @@
       });
       
     $('#id_do').daterangepicker({
+          startDate: moment(),
+          endDate: moment().subtract('hours', 12),      
     "singleDatePicker": true,
     "timePicker": true,
     "timePicker24Hour": true,
@@ -186,6 +221,11 @@
         }
       });      
 
+$( "a" ).click(function() {
+  var nr = $(this).attr("id");
+   $('#id_stolik').val(nr);
+   $('#myModal').modal('hide');
+});
      
 
   });
