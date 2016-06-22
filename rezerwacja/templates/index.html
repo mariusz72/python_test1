@@ -62,7 +62,7 @@
 
    <section class="content">      
       
-    <form method="POST" class="post-form">{% csrf_token %}
+    <form method="POST" id="form_zad" class="post-form">{% csrf_token %}
 
           <div class="box box-primary">
             <div class="box-header">
@@ -244,7 +244,7 @@ $( "#id_stolik" ).change(function () {
  }).change();
 
 $( "#id_ileosob" ).change(function () {
-  var max = 10;
+  var max = 20;
   if ($("#id_ileosob").val()<0 ){
 	alert('Ilość osób nie może być wartością ujemną!');
 	$("#id_ileosob").val('');
@@ -255,23 +255,25 @@ $( "#id_ileosob" ).change(function () {
    };
  }).change();
 
-//$("#id_od,#id_od").change(function () {
-//   var d = new Date();
-//   var hour = d.getHours()<10?'0'+d.getHours():''+d.getHours();
-//   var minute = d.getMinutes()<10?'0'+d.getMinutes():''+d.getMinutes();
-//   var month = d.getMonth() + 1;
-//   var now = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + hour + ":" + minute;
 
-//  if (($("#id_od").val()>=$("#id_do").val()) && $("#id_do").val().length !=''){
-//	alert('Nieprawidłowy zakres dat! [Początek rezerwacji > Koniec rezerwacji]');
-//	$("#id_od").val('');
-//	$("#id_do").val('');
-//  } else if ($("#id_od").val()<now && $("#id_od").val().length !=''){
-//	alert('Nieprawidłowa data [Początek rezerwacji] '+ now +'='+$("#id_od").val());
-//	$("#id_od").val('');
-//  };
+$("#form_zad").on('submit',function(){
+   var d = new Date();
+   var hour = d.getHours()<10?'0'+d.getHours():''+d.getHours();
+   var minute = d.getMinutes()<10?'0'+d.getMinutes():''+d.getMinutes();
+   var mont1 = d.getMonth() + 1;
+   var month = mont1<10?'0'+mont1:''+mont1;
+   var now = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + hour + ":" + minute;
+   var dat_od = $("#id_od").val();
 
-//}).change();
+
+ if(($("#id_od").val()>=$("#id_do").val()) && $("#id_do").val().length !=''){
+  alert('Nieprawidłowy zakres dat! \n"Koniec rezerwacji" musi być starszy od "Początek rezerwacji"');
+  return false;
+ } else if (dat_od<now && $("#id_od").val().length !=''){
+  alert('Nieprawidłowa data [Początek rezerwacji] ');
+  return false;
+ }
+});
 
   });
 

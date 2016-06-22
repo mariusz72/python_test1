@@ -22,9 +22,9 @@ def index(request):
          zmienna_post = 'zwalidowane'
    
 	 #walidacja
-         stolik = Stoliki.objects.get(nr_stolika=2)
+         stolik = Stoliki.objects.get(nr_stolika=request.POST['stolik'])
 	 #ativRezerwacje = Rezerwacje.objects.filter(od>'2016-06-20 21:00')
-         types_list = Rezerwacje.objects.filter(Q(nazwisko='1wewe2') | Q(od__gt=datetime.datetime.now()))
+         types_list = Rezerwacje.objects.filter(Q(od__gt=datetime.datetime.now()) | Q(do__gt=datetime.datetime.now()))
          #types_list = Rezerwacje.objects.filter(nazwisko='wewe')
          #entry = types_list.all()[1].od # some previous entry 
          entry = types_list.all().count()
