@@ -12,7 +12,10 @@ class Stoliki(models.Model):
     class Meta:
         verbose_name = "Stolik"
         verbose_name_plural = "Stoliki"
-
+        
+    def __unicode__(self):
+        #return self.nr_stolika      
+        return unicode(self.nr_stolika) or u''
 
 class Rezerwacje(models.Model):
     data_rezerwacji = models.DateTimeField('Data rezerwacji', auto_now_add=True)

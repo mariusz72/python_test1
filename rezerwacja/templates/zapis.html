@@ -61,6 +61,19 @@
    </section>
 
    <section class="content">     
+   
+   {% if alert != 0  %}
+          <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i>Rezerwacja nie powiodła się.</h4>
+                Error : <b>{{ alert }}</b>
+         </div> 
+             <div class="box-footer">
+                <button type="button" onClick="history.back()" class="btn btn-info pull-right">Powrót do formularza</button>
+             </div>
+         
+   {% else %}
+
           <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="icon fa fa-check"></i>Rezerwacja wykonana.</h4>
@@ -91,9 +104,16 @@
               </dl>
             </div>
             <!-- /.box-body -->
+             <div class="box-footer">
+                <button type="button" onClick="location.href=''" class="btn btn-info pull-right">Powrót do formularza</button>
+             </div>
           </div>
           <!-- /.box -->
         </div> 
+
+   {% endif %}
+   
+
         
    </section>
    

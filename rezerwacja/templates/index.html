@@ -76,7 +76,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-clock-o"></i>
                   </div>
-                  {{ form.od|addcss:'form-control'  }}
+                  {{ form.od|add_css_attr:'form-control,true'   }}
                 </div>
               </div>
 
@@ -86,7 +86,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-clock-o"></i>
                   </div>
-                  {{ form.do|addcss:'form-control'  }}
+                  {{ form.do|add_css_attr:'form-control,true'   }}
                 </div>
               </div>      
               
@@ -122,7 +122,7 @@
 
               <div class="form-group">
                 <label>Nr stolika:</label>
-                <div class="input-group" >
+                <div class="input-group" data-toggle="modal" data-target="#myModal">
                    <div class="input-group-addon">
                     <i class="fa fa-coffee" data-toggle="modal" data-target="#myModal"></i>
                   </div>
@@ -209,7 +209,7 @@
       
     $('#id_do').daterangepicker({
           startDate: moment(),
-          endDate: moment().subtract('hours', 12),      
+          endDate: moment(),      
     "singleDatePicker": true,
     "timePicker": true,
     "timePicker24Hour": true,
@@ -219,7 +219,10 @@
         locale: {
         format: 'YYYY-MM-DD HH:mm'
         }
-      });      
+      });   
+
+$('#id_od').val('');
+$('#id_do').val(''); 
 
 $( "a" ).click(function() {
   var nr = $(this).attr("id");
@@ -227,6 +230,48 @@ $( "a" ).click(function() {
    $('#myModal').modal('hide');
 });
      
+
+$( "#id_stolik" ).change(function () {
+  var max = 11;
+  if ($("#id_stolik").val()<1 && $("#id_stolik").val()!=''){
+	alert('Nr stolika musi być wartością większą od zera!');
+	$("#id_stolik").val('');
+   };
+  if ($("#id_stolik").val()>max ){
+	alert('Niewlaściwy nr stolika!');
+	$("#id_stolik").val('');
+   };
+ }).change();
+
+$( "#id_ileosob" ).change(function () {
+  var max = 10;
+  if ($("#id_ileosob").val()<0 ){
+	alert('Ilość osób nie może być wartością ujemną!');
+	$("#id_ileosob").val('');
+   };
+  if ($("#id_ileosob").val()>max ){
+	alert('Brak stolika na wskazaną liczbę osób! \n:max 10 osób');
+	$("#id_ileosob").val('');
+   };
+ }).change();
+
+//$("#id_od,#id_od").change(function () {
+//   var d = new Date();
+//   var hour = d.getHours()<10?'0'+d.getHours():''+d.getHours();
+//   var minute = d.getMinutes()<10?'0'+d.getMinutes():''+d.getMinutes();
+//   var month = d.getMonth() + 1;
+//   var now = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + hour + ":" + minute;
+
+//  if (($("#id_od").val()>=$("#id_do").val()) && $("#id_do").val().length !=''){
+//	alert('Nieprawidłowy zakres dat! [Początek rezerwacji > Koniec rezerwacji]');
+//	$("#id_od").val('');
+//	$("#id_do").val('');
+//  } else if ($("#id_od").val()<now && $("#id_od").val().length !=''){
+//	alert('Nieprawidłowa data [Początek rezerwacji] '+ now +'='+$("#id_od").val());
+//	$("#id_od").val('');
+//  };
+
+//}).change();
 
   });
 
