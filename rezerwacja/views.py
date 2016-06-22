@@ -23,21 +23,28 @@ def index(request):
    
 	 #walidacja
          stolik = Stoliki.objects.get(nr_stolika=request.POST['stolik'])
-	 #ativRezerwacje = Rezerwacje.objects.filter(od>'2016-06-20 21:00')
          types_list = Rezerwacje.objects.filter(Q(od__gt=datetime.datetime.now()) | Q(do__gt=datetime.datetime.now()))
          #types_list = Rezerwacje.objects.filter(nazwisko='wewe')
          #entry = types_list.all()[1].od # some previous entry 
          entry = types_list.all().count()
-         #old_authors = entry.nazwisko.all()[1]
+
+         zakres='null' 
+         rezerwacja_lista = Rezerwacje.objects.filter((Q(od__gt=datetime.datetime.now()) | Q(do__gt=datetime.datetime.now())) & Q(stolik=request.POST['stolik']) )
+         if rezerwacja_lista.all().count()>0:
+            for item in rezerwacja_lista:
+             if u'%s' % (request.POST['od']) <= u'%s' % (item.do) and u'%s' % (request.POST['do']) >=u'%s' % (item.od): 
+		od_do=u'%s' % (item.od)+' - '+u'%s' % (item.do)
+                zakres='empty'
+                break
 
          
          if int(request.POST['ileosob']) > int(stolik.ile_osob):
-             alert = 'Przekroczona ilosc osob, max='+str(stolik.ile_osob)
-         elif request.POST['od'] <> request.POST['do']:
+             alert = 'Przekroczona ilosc osob dla wybranego stolika, max='+str(stolik.ile_osob)
+         elif zakres=='empty':
               e = datetime.datetime.strptime(request.POST['do'], "%Y-%m-%d %H:%M")
               c = datetime.datetime.strptime(request.POST['od'], "%Y-%m-%d %H:%M")
               timediff = e-c
-              alert = 'Nieprawidlowa data'+ u'%s' % (timediff.total_seconds())+ 'entry ='+ u'%s' % (entry) +' ===>' + u'%s' % (datetime.datetime.now())
+              alert = 'Stolik nr:'+request.POST['stolik']+' jest zajety w terminie '+od_do
          else:
             alert = 0
             post = form.save()

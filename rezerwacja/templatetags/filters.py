@@ -11,4 +11,8 @@ def addattr(value, args):
     arg_list = [arg.strip() for arg in args.split(',')]
     return value.as_widget(attrs={'class': arg_list[0], 'required': arg_list[1]})
 
+@register.filter
+def to_date(value):
+    return value.replace(":00+00:00","")
+
 
