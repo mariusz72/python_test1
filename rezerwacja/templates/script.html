@@ -1,0 +1,93 @@
+{% load staticfiles %}
+{% load filters %}
+
+<script>
+
+  $(function () {
+
+    $('#id_od').daterangepicker({
+          startDate: moment(),
+          endDate: moment().subtract('hours', 12),
+    "singleDatePicker": true,
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "timePickerIncrement": 30,
+    "opens": "left",
+    "drops": "up",
+        locale: {
+        format: 'YYYY-MM-DD HH:mm'
+        }
+      });
+      
+    $('#id_do').daterangepicker({
+          startDate: moment(),
+          endDate: moment(),      
+    "singleDatePicker": true,
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "timePickerIncrement": 30,
+    "opens": "left",
+    "drops": "up",
+        locale: {
+        format: 'YYYY-MM-DD HH:mm'
+        }
+      });   
+
+$('#id_od').val('');
+$('#id_do').val(''); 
+
+$( "a" ).click(function() {
+  var nr = $(this).attr("id");
+   $('#id_stolik').val(nr);
+   $('#myModal').modal('hide');
+});
+     
+
+$( "#id_stolik" ).change(function () {
+  var max = 11;
+  if ($("#id_stolik").val()<1 && $("#id_stolik").val()!=''){
+	alert('Nr stolika musi być wartością większą od zera!');
+	$("#id_stolik").val('');
+   };
+  if ($("#id_stolik").val()>max ){
+	alert('Niewlaściwy nr stolika!');
+	$("#id_stolik").val('');
+   };
+ }).change();
+
+$( "#id_ileosob" ).change(function () {
+  var max = 20;
+  if ($("#id_ileosob").val()<0 ){
+	alert('Ilość osób nie może być wartością ujemną!');
+	$("#id_ileosob").val('');
+   };
+  if ($("#id_ileosob").val()>max ){
+	alert('Brak stolika na wskazaną liczbę osób! \n:max 10 osób');
+	$("#id_ileosob").val('');
+   };
+ }).change();
+
+
+$("#form_zad").on('submit',function(){
+   var d = new Date();
+   var hour = d.getHours()<10?'0'+d.getHours():''+d.getHours();
+   var minute = d.getMinutes()<10?'0'+d.getMinutes():''+d.getMinutes();
+   var mont1 = d.getMonth() + 1;
+   var month = mont1<10?'0'+mont1:''+mont1;
+   var now = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + hour + ":" + minute;
+   var dat_od = $("#id_od").val();
+
+
+ if(($("#id_od").val()>=$("#id_do").val()) && $("#id_do").val().length !=''){
+  alert('Nieprawidłowy zakres dat! \n"Koniec rezerwacji" musi być starszy od "Początek rezerwacji"');
+  return false;
+ } else if (dat_od<now && $("#id_od").val().length !=''){
+  alert('Nieprawidłowa data [Początek rezerwacji] ');
+  return false;
+ }
+});
+
+  });
+
+</script>
+

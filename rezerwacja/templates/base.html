@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% load filters %}
+
+<html>
+    <head>
+        <title>Django - System rezerwacji stolika</title>
+
+        <!-- Include Required Prerequisites -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+        <!-- Include Date Range Picker -->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+           <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">     
+        <link rel="stylesheet" href="{% static 'css/AdminLTE.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/rezerwacje.css' %}">
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+
+      <div class="callout callout-info">
+        <h4>System rezerwacji stolika</h4>
+      </div>
+    <section class="content-header">
+
+      <div class="box box-default">
+        <div class="box-header with-border ">
+          <h3 class="box-title">Założenia</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="box-body">
+              <ol>
+                <li>Wybranie z kalendarza daty i godziny rezerwacji</li>
+                <li>Podanie imienia i nazwiska rezerwującego</li>
+                <li>Podanie adresu email</li>
+                <li>Wybranie stolika (stoliki powinny być pokazane w sposób graficzny w przykładowej Sali)</li>
+                <li>Określenie liczby osób</li>
+                <li>System powinien poinformować jeżeli stolik jest wolny, jeżeli zajęty wyświetlić informacje o
+                    terminie zajętości i zaproponować stolik wolny w tym terminie z uwzględnieniem ilości osób
+                    które mogą się zmieścić przy danym stoliku.</li>
+                <li>System powinien wyświetlić podsumowanie do potwierdzenia przez użytkownika wraz z ceną
+                    rezerwacji 5$ za osobę.</li>
+                <li>Po potwierdzeniu rezerwacji informacja powinna się wysłać na e-mail.</li>
+              </ol>
+            </div>          
+          </div>
+          <!-- /.row -->
+        </div>
+      </div>
+      <!-- /.box -->
+      
+   </section>
+
+{% block content %}{% endblock content %}
+{% block modal %}{% endblock modal %} 
+{% block script %}{% endblock script %}   
+    
+    </body>
+</html>
