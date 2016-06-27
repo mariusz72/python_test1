@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', 'rezerwacja.views.index'),
+    url(r'^$', 'rezerwacja.views.index'),
+    url(r'^zapisz_rez/$', 'rezerwacja.views.zapisz_rez'),
 ]

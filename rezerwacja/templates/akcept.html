@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+{% load filters %}
+
+   <section class="content">     
+   
+   {% if alert != 0  %}
+          <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i>Rezerwacja nie powiodła się.</h4>
+                Error : <b>{{ alert|to_date}}</b>
+
+	{% if wolny == 0  %}
+ 		<div class="bg-aqua-active color-palette"><span>Brak wolnego stolika w wybranym terminie.</span></div>
+        {% else %}
+		<div class="bg-aqua-active color-palette"><span>W wybranym terminie wolny jest stolik nr: {{ wolny }}</span></div>
+        {% endif %}
+               
+         </div> 
+             <div class="box-footer">
+                <button type="button" onClick="history.back()" class="btn btn-info pull-right">Powrót do formularza</button>
+             </div>
+         
+   {% else %}
+
+          <div id="sd1" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-info"></i>Potwierdzenie rezerwacji.</h4>
+         </div> 
+          <div id="sd2" class="alert alert-success alert-dismissible" style="display:none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i>Rezerwacja wykonana.</h4>
+                Potwierdzenie wysłano do: <b>{{ zmienna.email}}</b>
+		<div class="bg-red-active color-palette"><span>Z uwagi na ograniczenia serwera i blokowany smtp maile nie są wysyłane!</span></div>
+         </div> 
+ 
+           <div class="box box-solid">
+            <div class="box-header with-border">
+              <i class="fa fa-text-width"></i>
+
+              <h3 class="box-title">Dane Rezerwacji</h3>
+            </div>
+            <!-- /.box-header -->
+	<form method="POST" id="post-form">{% csrf_token %}
+            <div class="box-body">
+              <dl class="dl-horizontal">
+                <dt>Imie</dt>
+		<input id="id_imie" name="imie" type="hidden" value="{{ zmienna.imie}}"/>
+                <dd>{{ zmienna.imie}}</dd>
+                <dt>Nazwisko</dt>
+		<input id="id_nazwisko" name="nazwisko" type="hidden" value="{{ zmienna.nazwisko}}"/>
+                <dd>{{ zmienna.nazwisko}}</dd>
+                <dt>Nr stolika</dt>
+		<input id="id_stolik" name="stolik" type="hidden" value="{{ zmienna.stolik}}"/>
+                <dd>{{ zmienna.stolik}}</dd>
+                <dt>Ilość osób</dt>
+		<input id="id_ileosob" name="ileosob" type="hidden" value="{{ zmienna.ileosob}}"/>
+                <dd>{{ zmienna.ileosob}}</dd>
+                <dt>Data Rezerwacji</dt>
+		<input id="id_od" name="od" type="hidden" value="{{ zmienna.od}}"/>
+		<input id="id_do" name="do" type="hidden" value="{{ zmienna.do}}"/>
+                <dd>{{ zmienna.od}}  -  {{ zmienna.do}}</dd>    
+                <dt>Cena</dt>
+                <dd>{{ cena}}$</dd> 
+		<input id="id_email" name="email" type="hidden" value="{{ zmienna.email}}"/>
+              </dl>
+            </div>
+            <!-- /.box-body -->
+	</form>
+
+             <div class="box-footer">
+                <button id="save" type="button" class="btn btn-info pull-left">Potwierdz wybor</button>
+                <button type="button" onClick="location.href=''" class="btn btn-info pull-right">Powrót do formularza</button>
+             </div>
+          </div>
+          <!-- /.box -->
+        </div> 
+
+   {% endif %}
+       
+   </section>
+{% endblock content %}   
+
+{% block script %} 
+<script>
+
+$(function () {
+
+	$( "#save" ).click(function() {
+
+            var post = {{ zmienna|jsonify|safe }}; 
+
+	    $.ajax({
+		url : "/zapisz_rez/", 
+		type : "POST", 
+                data: post,
+                dataType: 'text',
+
+		success : function(json) {
+                    //alert(json); 
+                    $("#save").hide();
+                    $("#sd1").hide();
+                    $("#sd2").show();
+ 		},
+
+		error : function(xhr,errmsg,err) {
+		    alert(xhr.status + ": " + xhr.responseText); 
+		}
+	    });
+	});
+
+});
+
+</script>
+{% endblock script %}    
+
