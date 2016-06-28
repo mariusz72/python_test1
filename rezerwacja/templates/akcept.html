@@ -90,16 +90,18 @@ $(function () {
 
 	$( "#save" ).click(function() {
 
-            var post = {{ zmienna|jsonify|safe }}; 
+            var data = $('#post-form').serializeArray();
 
 	    $.ajax({
 		url : "/zapisz_rez/", 
 		type : "POST", 
-                data: post,
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                data: data,
+                traditional: true,
                 dataType: 'text',
 
 		success : function(json) {
-                    //alert(json); 
+                    alert(json); 
                     $("#save").hide();
                     $("#sd1").hide();
                     $("#sd2").show();
