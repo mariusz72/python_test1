@@ -74,7 +74,8 @@ $("#form_zad").on('submit',function(){
    var minute = d.getMinutes()<10?'0'+d.getMinutes():''+d.getMinutes();
    var mont1 = d.getMonth() + 1;
    var month = mont1<10?'0'+mont1:''+mont1;
-   var now = d.getFullYear() + "-" + month + "-" + d.getDate() + " " + hour + ":" + minute;
+   var day = d.getDate()<10?'0'+d.getDate():''+d.d.getDate();
+   var now = d.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute;
    var dat_od = $("#id_od").val();
 
 
@@ -82,7 +83,7 @@ $("#form_zad").on('submit',function(){
   alert('Nieprawidłowy zakres dat! \n"Koniec rezerwacji" musi być starszy od "Początek rezerwacji"');
   return false;
  } else if (dat_od<now && $("#id_od").val().length !=''){
-  alert('Nieprawidłowa data [Początek rezerwacji] ');
+  alert('Nieprawidłowa data [Początek rezerwacji] '+ now);
   return false;
  }
 });
